@@ -6,6 +6,10 @@ import com.Status;
 import com.beans.Car;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+/**
+ * Spring Data Repository
+ * Add project specific queries to auto generated Repo functionality
+ */
 public interface CarRepository extends MongoRepository<Car, String>{
 	public List<Car> findByMake(String make);
     public List<Car> findByColor(String color);
