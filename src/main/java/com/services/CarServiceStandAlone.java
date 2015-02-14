@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Implements the CarService interface - loaded by Congfiguration when the 'connectd' profile is enabled
+ * Interacts with the CarRepository
  */
 public class CarServiceStandAlone implements CarService {
     public CarServiceStandAlone(){

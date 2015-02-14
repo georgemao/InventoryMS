@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
- *
+ * Implements the CarService interface - loaded by Congfiguration when the 'connectd' profile is enabled
+ * Interacts with the CarRepository
  */
 public class CarServiceConnected implements CarService{
 

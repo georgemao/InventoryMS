@@ -5,10 +5,7 @@ import com.Status;
 import com.beans.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +32,10 @@ public class InventoryControllerRS {
     @Autowired
     Environment env ;
 
+    /**
+     * This provides listing of all cars in the inventory
+     * @return
+     */
     @RequestMapping("/getAllCars")
     public List<Car> getAllCars(){
         List<Car> cars = new ArrayList<Car>();
@@ -46,8 +47,32 @@ public class InventoryControllerRS {
         return cars;
     }
 
+    /**
+     * This method sells a Car, using a request param in the URL
+     * @param vin the URL param
+     * @return the car that was sold
+     */
     @RequestMapping("/sellCar")
-    public Car sellCar(@RequestParam String vin){
+    public @ResponseBody Car sellCar(@RequestParam String vin){
+        return sellOneCar(vin);
+    }
+
+    /**
+     * This method sells a Car, using a path param in the URL
+     * @param vin the PATH param
+     * @return the car that was sold
+     */
+    @RequestMapping("/sellCar/{vin}")
+    public @ResponseBody Car sellCarPathParam(@PathVariable String vin){
+        return sellOneCar(vin);
+    }
+
+    /**
+     * Utility Helper method that sells a car
+     * @param vin
+     * @return
+     */
+    private Car sellOneCar(String vin){
         // protect against invalid/nonexisting vins
         Optional<Car> optCar = Optional.ofNullable(carService.findByVin(vin));
 
@@ -62,12 +87,6 @@ public class InventoryControllerRS {
         }
         return null;
     }
-
-    @RequestMapping("/test/{vin}")
-    public String test(@PathVariable String vin){
-        return vin;
-    }
-
     /**
      * Helper method that determins if mongo is enabled
      * @return

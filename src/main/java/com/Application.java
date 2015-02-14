@@ -6,7 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by George.Mao on 11/14/2014.
+ * Spring Boot Application entry point
+ *
  */
 @Configuration
 @ComponentScan
